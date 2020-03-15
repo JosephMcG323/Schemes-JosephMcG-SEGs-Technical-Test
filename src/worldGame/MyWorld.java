@@ -18,7 +18,7 @@ public class MyWorld {
 
 		sleepAndClearConsole();
 		
-		while(true==true)
+		while(true)
 		{
 		
 		myWorldCreator(arrayIn);
@@ -61,11 +61,16 @@ public class MyWorld {
 	public static void liveCellChecker(int arr[][], int ii, int jj, int liveCheck)
 	{
 		//DOES THE LIVE CELL LIVE OR DIE?
-    	//THIS IS SEARCHING AROUND THE CELL CLOCKWISE 
+    	//THIS IS SEARCHING AROUND THE LIVE CELL CLOCKWISE 
 		
 		int size=10;
+		
+		boolean hasAreaAbove = ((ii-1)>=0);
+		boolean hasAreaRight = (jj+1<size);
+		boolean hasAreaBelow = (ii+1<size);
+		boolean hasAreaLeft = (jj-1>=0);
 	 
-		if((ii-1)>=0)
+		if(hasAreaAbove)
 		{	
 			//  0?0
 			//  010
@@ -76,7 +81,7 @@ public class MyWorld {
 					 liveCheck++;
 				 }
 		
-		 if(jj+1<size)
+		 if(hasAreaRight)
 		  {
 				//  00?
 				//  010
@@ -89,7 +94,7 @@ public class MyWorld {
 		}	 
 		
 		
-		 if(jj+1<size)
+		 if(hasAreaRight)
 	     {
 				//  000
 				//  01?
@@ -99,7 +104,7 @@ public class MyWorld {
 					 liveCheck++;
 				 } 
 				 
-		  if(ii+1<size)
+		  if(hasAreaBelow)
 		    {
 				//  000
 				//  010
@@ -112,7 +117,7 @@ public class MyWorld {
 		  
 	    }
 		 
-		 if(ii+1<size)
+		 if(hasAreaBelow)
 		    {
 				//  000
 				//  010
@@ -122,7 +127,7 @@ public class MyWorld {
 					 liveCheck++;
 
 				 }
-		     if(jj-1>=0)
+		     if(hasAreaLeft)
 		     {
 		    		//  000
 					//  010
@@ -137,7 +142,7 @@ public class MyWorld {
 		    }
 		 
 		 
-		 if(jj-1>=0)
+		 if(hasAreaLeft)
 	     {
 				//  000
 				//  ?10
@@ -149,7 +154,7 @@ public class MyWorld {
 
 				 }
 				 
-		   if(ii-1>=0)
+		   if(hasAreaAbove)
 		   {	 
 			    //  ?00
 				//  010
@@ -177,15 +182,28 @@ public class MyWorld {
 		
 	}
 	
+
+	
 	public static void fillingTheArray(int arr[][], int ii, int jj)
 	{
 		int size = 10;
 
+		
+		boolean hasSizeTwoCellsRight = (jj + 2 < size);
+		boolean hasOneCellSpaceAbove = (ii - 1 >= 0);
+		boolean hasOneCellBelow = (ii + 1 < size);
+		boolean hasTwoCellsAbove = (ii - 2 >= 0);
+		boolean hasOneCellLeft = (jj - 1 >= 0);
+		boolean hasOneCellRight = (jj + 1 < size);
+		boolean hasOneCellAbove = (ii - 1 >= 0);
+		
 		// FILLING ARRAY HORIZONTALLY
 
-		if (jj + 2 < size) {
-			if (ii - 1 >= 0) {
-				// 030
+		if (hasSizeTwoCellsRight) {
+			if (hasOneCellSpaceAbove) {
+				
+				//above
+				//  030
 				// .111
 				//
 				if ((arr[ii][jj + 1] == 1 || arr[ii][jj + 1] == 2) && (arr[ii][jj + 2] == 1 || arr[ii][jj + 2] == 2)
@@ -196,7 +214,8 @@ public class MyWorld {
 
 			}
 
-			if (ii + 1 < size) {
+			if (hasOneCellBelow) {
+				
 				// below 111
 				// .030
 				//
@@ -213,11 +232,11 @@ public class MyWorld {
 		// FILLING ARRAY VERTICALLY
 		//
 
-		if (ii - 2 >= 0) {
-			// 1
+		if (hasTwoCellsAbove) {
+			//  1
 			// 31
 			// .1
-			if (jj - 1 >= 0) {
+			if (hasOneCellLeft) {
 
 				if ((arr[ii - 1][jj] == 1 || arr[ii - 1][jj] == 2) && (arr[ii - 2][jj] == 1 || arr[ii - 2][jj] == 2)
 						&& (arr[ii - 1][jj - 1] == 0)) {
@@ -226,11 +245,11 @@ public class MyWorld {
 				}
 			}
 
-			// 1
-			// 13
+			//  1
+			//  13
 			// .1
 
-			if (jj + 1 < size) {
+			if (hasOneCellRight) {
 
 				if ((arr[ii - 1][jj] == 1 || arr[ii - 1][jj] == 2) && (arr[ii - 2][jj] == 1 || arr[ii - 2][jj] == 2)
 						&& (arr[ii - 1][jj + 1] == 0)) {
@@ -244,7 +263,7 @@ public class MyWorld {
 		// FILLING ARRAY ADJACENT
 		//
 
-		if (ii - 1 >= 0 && jj + 1 < size)
+		if (hasOneCellAbove && hasOneCellRight)
 
 		{
 
@@ -286,7 +305,7 @@ public class MyWorld {
 		  // 01
 		  
 
-		if (ii + 1 < size && jj + 1 < size) {
+		if (hasOneCellBelow && hasOneCellRight) {
 
 			if ((arr[ii][jj + 1] == 1 || arr[ii][jj + 1] == 2) && (arr[ii + 1][jj + 1] == 1 || arr[ii + 1][jj + 1] == 2)
 					&& (arr[ii + 1][jj] == 0)) {

@@ -120,7 +120,7 @@ public class InputTestCases {
 		obtest.myWorldCreator(arrayIn);
 		
 
-		boolean originalTestCheck =(
+		boolean originalTestCheckCorner =(
 			    java.util.Arrays.deepEquals(
 			    		arrayIn,
 			    		arrayOut
@@ -128,7 +128,53 @@ public class InputTestCases {
 			    )
 			);
 		
-		assertTrue(originalTestCheck);
+		assertTrue(originalTestCheckCorner);
 	}
+	
+	
+	@Test
+	public void EmptyCells() {
+		
+		int[][] arrayIn = {
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				};
+		
+		int[][] arrayOut = {
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				};
+		
+		
+		obtest.myWorldCreator(arrayIn);
+		
+
+		boolean originalTestCheckEmpty =(
+			    java.util.Arrays.deepEquals(
+			    		arrayIn,
+			    		arrayOut
+			        
+			    )
+			);
+		
+		assertTrue(originalTestCheckEmpty);
+	}
+	
 	
 }
