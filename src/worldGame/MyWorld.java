@@ -1,53 +1,28 @@
 package worldGame;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 public class MyWorld {
 	
 	static int genCount = 1;
 	public static void main(String[] args) throws InterruptedException
 	{
-		int[][] arrayIn = {
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, 
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 },
-				{ 1, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
-				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 1, 1, 0, 0, 0, 1, 0, 0, 1, 1 },
-				{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
-				};
 
-		int m=10;
-		int n=10;
-
+		int[][]arrayIn = new int[10][10];
+		
+		generateRand2DArray(arrayIn);
+		
+		System.out.println(new String(new char[70]).replace("\0", "\r\n"));
 		printingCells(arrayIn);
-		
-		/*
-		 * System.out.println("Starting generation 1");
-		 * 
-		 * for(int i=0; i<m; i++) { for(int j=0; j<n; j++)
-		 * 
-		 * { //System.out.print(arrayIn[i][j]);
-		 * 
-		 * if(arrayIn[i][j]==1) { // System.out.print("*"); System.out.print("1");
-		 * 
-		 * } else { System.out.print("0"); }
-		 * 
-		 * } System.out.println(""); }
-		 */
-		 
-		 sleepAndClear();
-		
-		
+
+		sleepAndClearConsole();
 		
 		while(true==true)
 		{
 		
 		myWorldCreator(arrayIn);
-		sleepAndClear();
+		sleepAndClearConsole();
 
 		}
 	}
@@ -82,25 +57,6 @@ public class MyWorld {
 	
 	 
 	}
-	
-	public static void liveCellChecker2(int arr[][], int ii, int jj, int liveCheck)
-	{
-		
-		for(int ai= -1; ai<=1; ai++)
-		{
-			for(int aj=-1; aj<=1; aj++)
-			{
-				
-				if(arr[ai][aj]==1 || arr[ai][aj]==2)
-				{
-					
-				}
-				
-			}
-		}
-		
-	} 
-	
 	
 	public static void liveCellChecker(int arr[][], int ii, int jj, int liveCheck)
 	{
@@ -350,10 +306,9 @@ public class MyWorld {
 
 	}
 	
-	public static void printingCells(int[][]arr)
+	public static int[][] printingCells(int[][]arr)
 	{
 	
-
 		 System.out.println("Current Cell Life of generation " + genCount + "\n" + "----------");
 
 		 genCount++;
@@ -375,22 +330,49 @@ public class MyWorld {
 					 arr[ii][jj]=1;
 
 				 }
-				
-					 System.out.print(arr[ii][jj]);
 				 
+				 if(arr[ii][jj]==1)
+				 {
+					 System.out.print("*");
+
+				 }
+				 
+				 else
+				 {
+					 System.out.print(" ");
+
+				 }
+									 
 			 }
 			 System.out.println("");
 		 }
 		 
 		 System.out.println("----------");
+		 return arr;
 	}
 	
-	
-public static void sleepAndClear() throws InterruptedException
+	public static void generateRand2DArray(int[][]arr)
 	{
-		//Pauses the output for 7 seconds and 
-		//spaces 70 characters out from the last output
-		//in the console
+
+		for(int i=0; i< 10; i++)
+		{
+			for(int j=0; j< 10; j++)
+			{
+				Random rand = new Random();
+				int randNum = rand.nextInt(2);
+				arr[i][j] = randNum;
+				
+			}
+			
+		}
+		
+		
+	}
+	
+    public static void sleepAndClearConsole() throws InterruptedException
+	{
+		//Pauses the output for 7 seconds  
+		//spaces 70 characters out from the last console output
 		TimeUnit.SECONDS.sleep(7);
 		System.out.println(new String(new char[70]).replace("\0", "\r\n"));
 	}
